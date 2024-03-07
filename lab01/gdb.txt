@@ -1,9 +1,13 @@
-1.
-2.
-3.
-4.
-5.
-6.
-7.
-8.
-9.
+1.[r]un arg1 arg2 ... argn
+set args arg1 arg2 ... argn
+[r]un
+2.[b]reak <function name or filename:line# or *memory address>
+3.[n]ext
+Steps through a single line of code. Steps over function calls.
+4.[s]tep
+Steps through a single line of code. Steps into function calls.
+5.[c]ontinue
+6.[p]rint[f] <expression>
+7.display
+8.info locals
+9.[q]uit

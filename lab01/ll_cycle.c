@@ -3,5 +3,19 @@
 
 int ll_has_cycle(node *head) {
     /* your code here */
-    return 0;
+    node *tortoise = head;
+    node *hare = head;
+    do{
+    	if(hare == NULL){
+    		return 0;
+    	}else if(hare->next == NULL){
+		return 0;
+	}else if((hare->next)->next == NULL){
+		return 0;
+	}else{
+		hare = (hare->next)->next;
+		tortoise = tortoise->next;
+	}
+    }while(hare != tortoise);
+    return 1;
 }
