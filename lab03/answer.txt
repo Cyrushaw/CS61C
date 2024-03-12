@@ -1,0 +1,15 @@
+Exercise1
+(1).data signals the start of the data dection, and .text signals the start of the code section
+.word represents the format of data: 32-bit word
+(2)34, it is the ninth (0-indexed) number of Fibonacci sequence
+(3)0x10000010
+(4)just change t3's value to 13 after 9 was loaded into t3
+Exercise2
+(1)t0
+(2)a0
+(3)s1 for source and s2 fot dest
+(4)label loop
+(5)line29, 30, 31, 42, 43, 45
+line 19 and 45 for updating index of array
+line 30 and 31 for visiting element of source
+line 42 and 43 for visiting element of dest 
