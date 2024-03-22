@@ -62,22 +62,40 @@ map:
     # - 4 for the size of the array
     # - 4 more for the pointer to the next node
 mapLoop:
-    add t1, s0, x0      # load the address of the array of current node into t1
+    # add t1, s0, x0    # load the address of the array of current node into t1
+    lw t1, 0(s0)        # NO3: load the value of s0 not itself (address)
+
     lw t2, 4(s0)        # load the size of the node's array into t2
 
-    add t1, t1, t0      # offset the array address by the count
+    slli t3, t0, 2
+    add t1, t1, t3      # NO4: offset shoule 4 times of counter
+    # add t1, t1, t0    # offset the array address by the count
     lw a0, 0(t1)        # load the value at that address into a0
+
+    addi sp, sp, -8
+    sw t1, 0(sp)        # NO1: temporary registers should be stored
+    sw a0, 4(sp)        # No2: argument registers should be stored
 
     jalr s1             # call the function on that value.
 
+    lw t1, 0(sp)        # restore 
     sw a0, 0(t1)        # store the returned value back into the array
+
+    lw a0, 4(sp)        # restore
+    addi sp, sp, 8
+
     addi t0, t0, 1      # increment the count
     bne t0, t2, mapLoop # repeat if we haven't reached the array size yet
 
-    la a0, 8(s0)        # load the address of the next node into a0
-    lw a1, 0(s1)        # put the address of the function back into a1 to prepare for the recursion
+    # la a0, 8(s0)      # load the address of the next node into a0
+    lw a0, 8(s0)        # NO5: load value of s0   
+    # lw a1, 0(s1)      # put the address of the function back into a1 to prepare for the recursion
+    addi a1, s1, 0      # NO6: load value of s1 not the value of address s1
 
     jal  map            # recurse
+    ##### Here is a recurse not loop, so we should jump and link map, and treat it as a function
+    ##### Attention!!! jal is for recurse, not j or branch, which is for loop
+    ##### But we should pop stack together after recurse has been done
 done:
     lw s0, 8(sp)
     lw s1, 4(sp)

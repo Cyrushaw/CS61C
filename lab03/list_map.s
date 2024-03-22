@@ -82,7 +82,8 @@ map_loop:
 
     # recurse
     ### YOUR CODE HERE ###
-    j map_loop
+    #j map_loop
+    jal map
 
 done:
     # Epilogue: Restore register values and free space from the stack
@@ -150,3 +151,4 @@ malloc:
 # the program try to change the contest of itself, because loop jumps to the wrong
 # address (line35 is wrong, and line42 is correct), remember: 
 # it's unnessary for loop to save s registers and ra, because it is not a function
+# but differ loop from recurse, and be sure about choosing j (branch) or jal
